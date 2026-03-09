@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siongo Matala | Portfolio</title>
+  <meta name="description" content="Siongo Matala - Mobile App Developer, IT Support, Azure and Entra ID portfolio." />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(59,130,246,0.24), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(99,102,241,0.20), transparent 24%),
+        linear-gradient(135deg, #071226 0%, #0b1020 38%, #160f3d 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell {
+      width: min(1200px, calc(100% - 32px));
+      margin: 28px auto;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(59,130,246,0.14), transparent 24%),
+        linear-gradient(135deg, rgba(9,17,40,0.92), rgba(12,14,45,0.96));
+      box-shadow: 0 25px 80px rgba(2, 6, 23, 0.5);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(99,102,241,0.15), transparent 18%),
+        radial-gradient(circle at 20% 70%, rgba(14,165,233,0.08), transparent 22%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 34px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 12, 31, 0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index: 5;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .brand-badge {
+      width: 18px;
+      height: 26px;
+      border-radius: 12px 12px 4px 12px;
+      background: linear-gradient(180deg, #38bdf8, #2563eb);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.45);
+      transform: rotate(8deg);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: rgba(255,255,255,0.78);
+      font-size: 14px;
+    }
+    .nav-links a:hover { color: #93c5fd; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+      padding: 46px 34px 56px;
+    }
+    .eyebrow {
+      color: #60a5fa;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(42px, 6vw, 74px);
+      line-height: 0.98;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -1.8px;
+      max-width: 620px;
+    }
+    h1 .accent {
+      color: #60a5fa;
+    }
+    .lead {
+      margin-top: 22px;
+      max-width: 590px;
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      border: none;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(37,99,235,0.42);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+    }
+    .btn-secondary:hover {
+      border-color: rgba(147,197,253,0.55);
+      color: #bfdbfe;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+      max-width: 620px;
+    }
+    .stat {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .stat span {
+      color: rgba(255,255,255,0.68);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .glow-ring {
+      position: absolute;
+      inset: 58px 34px 58px 34px;
+      border-radius: 42% 42% 38% 38% / 16% 16% 18% 18%;
+      border: 1px solid rgba(96,165,250,0.34);
+      box-shadow:
+        0 0 0 1px rgba(37,99,235,0.16),
+        0 0 45px rgba(37,99,235,0.25),
+        inset 0 0 40px rgba(96,165,250,0.06);
+    }
+    .portrait-wrap {
+      position: relative;
+      width: min(390px, 100%);
+      aspect-ratio: 0.78;
+      border-radius: 180px 180px 120px 120px / 120px 120px 90px 90px;
+      padding: 10px;
+      background: linear-gradient(180deg, rgba(96,165,250,0.95), rgba(37,99,235,0.38));
+      box-shadow: 0 0 44px rgba(59,130,246,0.35);
+    }
+    .portrait-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: #0f172a;
+    }
+    .portrait-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .float-card {
+      position: absolute;
+      border-radius: 22px;
+      background: rgba(8, 15, 36, 0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 35px rgba(2,6,23,0.35);
+      padding: 14px 16px;
+      max-width: 210px;
+    }
+    .float-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+    .float-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .card-top { top: 48px; right: -6px; }
+    .card-bottom { bottom: 54px; left: -8px; }
+    .orb {
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.98), rgba(59,130,246,0.28));
+      filter: blur(0.2px);
+      box-shadow: 0 22px 36px rgba(37,99,235,0.26);
+      transform: rotate(22deg);
+      top: 38px;
+      left: 8px;
+    }
+    .orb.two {
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
+      right: 20px;
+      bottom: 26px;
+      left: auto;
+      top: auto;
+      transform: rotate(-18deg);
+      opacity: 0.85;
+    }
+
+    section {
+      padding: 20px 34px 44px;
+    }
+    .section-title {
+      font-size: 30px;
+      margin: 0 0 18px;
+      letter-spacing: -0.5px;
+    }
+    .section-sub {
+      color: rgba(255,255,255,0.72);
+      max-width: 720px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .about-grid, .skills-grid, .project-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .about-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+    .card {
+      border-radius: 26px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 24px;
+    }
+    .card p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .project-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(59,130,246,0.22), transparent 68%);
+      pointer-events: none;
+    }
+    .project-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+    .project-card p {
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .project-meta span {
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #cbd5e1;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .skill-col h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+    .skill-list {
+      display: grid;
+      gap: 10px;
+      color: rgba(255,255,255,0.78);
+    }
+    .skill-list div {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .contact-links a {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #dbeafe;
+    }
+    .contact-lines {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      color: rgba(255,255,255,0.82);
+    }
+    .contact-lines a.inline-link {
+      color: #93c5fd;
+    }
+    footer {
+      padding: 0 34px 34px;
+      color: rgba(255,255,255,0.52);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .about-grid,
+      .project-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 34px;
+      }
+      .hero-visual {
+        min-height: 460px;
+        order: -1;
+      }
+      .glow-ring {
+        inset: 40px 20px;
+      }
+      .card-top { right: 8px; }
+      .card-bottom { left: 8px; }
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        padding: 18px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero, section, footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .mini-stats {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual {
+        min-height: 370px;
+      }
+      .portrait-wrap {
+        width: min(290px, 92%);
+      }
+      .float-card {
+        position: absolute;
+        max-width: 170px;
+        padding: 12px 14px;
+      }
+      .card-top {
+        top: 16px;
+        right: 0;
+      }
+      .card-bottom {
+        bottom: 10px;
+        left: 0;
+      }
+      .contact-card {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav>
+      <div class="brand">
+        <span class="brand-badge"></span>
+        <span>Siongo Matala</span>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main id="home" class="hero">
+      <div>
+        <div class="eyebrow">Welcome to my portfolio</div>
+        <h1>Hello, my name's <span class="accent">Siongo.</span></h1>
+        <p class="lead">
+          I'm a mobile app developer and IT support professional based in Sweden. I build practical digital products with
+          SwiftUI and React Native, and I also bring hands-on experience in IT support, Microsoft Azure, and Entra ID administration.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#portfolio">See my work</a>
+          <a class="btn btn-secondary" href="#contact">Contact me</a>
+          <a class="btn btn-secondary" href="cv.pdf" download>Download CV</a>
+        </div>
+
+        <div class="mini-stats">
+          <div class="stat">
+            <strong>2</strong>
+            <span>Flagship app projects in active development: TickMe and AfricaEats.</span>
+          </div>
+          <div class="stat">
+            <strong>iOS + RN</strong>
+            <span>Building across SwiftUI, Expo Router, JavaScript, and modern mobile UI.</span>
+          </div>
+          <div class="stat">
+            <strong>Cloud + Support</strong>
+            <span>Experience supporting users and working with Microsoft Azure and Entra ID.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orb"></div>
+        <div class="orb two"></div>
+        <div class="glow-ring"></div>
+
+        <div class="portrait-wrap">
+          <div class="portrait-inner">
+            <img src="profile.jpg" alt="Portrait of Siongo Matala" />
+          </div>
+        </div>
+
+        <div class="float-card card-top">
+          <h3>Mobile Development</h3>
+          <p>SwiftUI, React Native, Expo Router, UI building, testing, and app iteration.</p>
+        </div>
+
+        <div class="float-card card-bottom">
+          <h3>IT Support & Cloud</h3>
+          <p>User support, troubleshooting, Microsoft Azure, and Entra ID administration.</p>
+        </div>
+      </div>
+    </main>
+
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-sub">
+        I enjoy building useful software and solving practical technical problems. My current focus is mobile app development,
+        especially products that help people stay organized or access services more easily. Alongside development, I have IT support
+        experience with a strong interest in cloud tools and identity management.
+      </p>
+
+      <div class="about-grid">
+        <div class="card">
+          <p>
+            I'm currently building <strong>TickMe</strong>, a productivity app for tasks, scheduling, and calendar-based planning,
+            and <strong>AfricaEats</strong>, a food delivery platform focused on restaurants and stores. I care deeply about clean UI,
+            stable functionality, and building products that feel polished on real devices.
+          </p>
+        </div>
+        <div class="card">
+          <p>
+            In addition to software development, I also have experience in <strong>IT support</strong>, including troubleshooting,
+            supporting users, and working more especially in <strong>Microsoft Azure</strong> and <strong>Entra ID</strong>. This mix
+            of development and support helps me think both like a builder and like the person solving real user problems.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <h2 class="section-title">Portfolio</h2>
+      <p class="section-sub">
+        Here are the main projects I am building and refining as part of my developer journey.
+      </p>
+
+      <div class="project-grid">
+        <article class="card project-card">
+          <h3>TickMe</h3>
+          <p>
+            A task and calendar productivity app built with SwiftUI. It includes task creation, schedule management, calendar views,
+            dark and light mode support, and a growing roadmap toward a larger productivity platform.
+          </p>
+          <div class="project-meta">
+            <span>SwiftUI</span>
+            <span>iOS</span>
+            <span>Xcode</span>
+            <span>Productivity App</span>
+          </div>
+        </article>
+
+        <article class="card project-card">
+          <h3>AfricaEats</h3>
+          <p>
+            A food delivery and marketplace app built with React Native and Expo Router. Users can browse restaurants and stores,
+            explore menus, and manage basket flows in a modern delivery-style mobile interface.
+          </p>
+          <div class="project-meta">
+            <span>React Native</span>
+            <span>Expo Router</span>
+            <span>JavaScript</span>
+            <span>Food Delivery</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills & Experience</h2>
+      <p class="section-sub">
+        My profile combines software development, interface design interest, technical support, and cloud administration exposure.
+      </p>
+
+      <div class="skills-grid">
+        <div class="card skill-col">
+          <h3>Development</h3>
+          <div class="skill-list">
+            <div>SwiftUI</div>
+            <div>React Native</div>
+            <div>JavaScript</div>
+            <div>Expo Router</div>
+            <div>Webbutveckling</div>
+            <div>iOS / Android</div>
+          </div>
+        </div>
+
+        <div class="card skill-col">
+          <h3>IT Support</h3>
+          <div class="skill-list">
+            <div>IT Support</div>
+            <div>Windows Server</div>
+            <div>Microsoft 365</div>
+            <div>Intune</div>
+            <div>Samsung Knox</div>
+            <div>TeamViewer</div>
+            <div>Nätverk installation</div>
+          </div>
+        </div>
+
+        <div class="card skill-col">
+          <h3>Cloud & Identity</h3>
+          <div class="skill-list">
+            <div>Microsoft Azure</div>
+            <div>Microsoft Entra ID</div>
+            <div>Microsoft Entra (Azure AD)</div>
+            <div>PowerShell</div>
+            <div>Kali Linux</div>
+            <div>Grafisk design</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="card contact-card">
+        <div>
+          <h2 class="section-title" style="margin-bottom: 10px;">Let's Connect</h2>
+          <p class="section-sub" style="margin:0; max-width: 540px;">
+            I'm growing my portfolio and open to developer, support, and cloud-related opportunities where I can keep learning and contribute.
+          </p>
+
+          <div class="contact-lines">
+            <div><strong>Email:</strong> <a class="inline-link" href="mailto:siongomatala@gmail.com">siongomatala@gmail.com</a></div>
+            <div><strong>Mobile:</strong> <a class="inline-link" href="tel:+46735916216">+46 73 591 6216</a></div>
+            <div><strong>LinkedIn:</strong> <a class="inline-link" href="https://www.linkedin.com/in/matalasiongo/" target="_blank" rel="noreferrer">linkedin.com/in/matalasiongo</a></div>
+          </div>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:siongomatala@gmail.com">Email Me</a>
+          <a href="https://www.linkedin.com/in/matalasiongo/" target="_blank" rel="noreferrer">Open LinkedIn</a>
+          <a href="cv.pdf" download>Download CV</a>
+          <a href="#home">Back to Top</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Siongo Matala. Built in a modern dark gradient portfolio style.
+    </footer>
+  </div>
+</body>
+</html>
