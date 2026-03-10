@@ -1,338 +1,752 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matala Siongo | CV</title>
+  <meta name="description" content="Matala Siongo - Mobile Developer (iOS / Android) | SwiftUI • React Native • Cloud & IT Support" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --sidebar: #eef4ff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
 
-<title>Matala Siongo | CV</title>
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --line: #243041;
+      --accent: #60a5fa;
+      --accent-soft: #172554;
+      --sidebar: #0b1220;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+    }
 
-<style>
+    * {
+      box-sizing: border-box;
+    }
 
-:root{
---bg:#f5f7fb;
---card:#ffffff;
---text:#111;
---muted:#666;
---accent:#2563eb;
---sidebar:#eef4ff;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body.dark{
---bg:#0f172a;
---card:#111827;
---text:#f3f4f6;
---muted:#9ca3af;
---accent:#60a5fa;
---sidebar:#0b1220;
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:var(--bg);
-color:var(--text);
-transition:0.3s;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:16px 24px;
-background:var(--card);
-border-bottom:1px solid #ddd;
-}
+    .topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
 
-.controls{
-display:flex;
-gap:10px;
-}
+    .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
 
-button{
-cursor:pointer;
-border:none;
-padding:10px 14px;
-border-radius:10px;
-background:var(--card);
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
-}
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.page{
-max-width:1100px;
-margin:auto;
-padding:30px 20px;
-}
+    .icon-btn,
+    .download-btn,
+    .lang-btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+    }
 
-.cv{
-display:grid;
-grid-template-columns:320px 1fr;
-background:var(--card);
-border-radius:18px;
-overflow:hidden;
-}
+    .icon-btn:hover,
+    .download-btn:hover,
+    .lang-btn:hover {
+      transform: translateY(-1px);
+    }
 
-.sidebar{
-background:var(--sidebar);
-padding:30px;
-}
+    .lang-wrap {
+      position: relative;
+    }
 
-.main{
-padding:35px;
-}
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      min-width: 180px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: none;
+    }
 
-.avatar{
-width:120px;
-border-radius:50%;
-}
+    .lang-menu.show {
+      display: block;
+    }
 
-.name{
-font-size:26px;
-font-weight:bold;
-margin-top:10px;
-}
+    .lang-option {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
 
-.role{
-color:var(--muted);
-margin-top:6px;
-}
+    .lang-option:hover {
+      background: var(--accent-soft);
+    }
 
-.section{
-margin-top:28px;
-}
+    .page {
+      max-width: 1200px;
+      margin: 28px auto;
+      padding: 0 20px 40px;
+    }
 
-.section h3{
-color:var(--accent);
-letter-spacing:1px;
-font-size:14px;
-text-transform:uppercase;
-}
+    .cv-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
 
-ul{
-padding-left:18px;
-}
+    .sidebar {
+      background: var(--sidebar);
+      padding: 32px 26px;
+      border-right: 1px solid var(--line);
+    }
 
-.skills span{
-background:#dbeafe;
-padding:6px 10px;
-border-radius:999px;
-margin:5px;
-display:inline-block;
-font-size:13px;
-}
+    .main {
+      padding: 32px 32px 40px;
+    }
 
-body.dark .skills span{
-background:#1e3a8a;
-}
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
 
-a{
-color:var(--accent);
-text-decoration:none;
-}
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--card);
+      box-shadow: var(--shadow);
+    }
 
-@media(max-width:900px){
+    .name {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
 
-.cv{
-grid-template-columns:1fr;
-}
+    .role {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
 
-.sidebar{
-border-bottom:1px solid #ddd;
-}
+    .location {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
 
-}
+    .section {
+      margin-top: 28px;
+    }
 
-</style>
+    .section:first-child {
+      margin-top: 0;
+    }
 
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .intro-title {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .underline {
+      width: 100%;
+      height: 2px;
+      background: var(--line);
+      margin: 12px 0 24px;
+    }
+
+    .contact-list,
+    .plain-list,
+    .bullet-list {
+      margin: 0;
+      padding: 0;
+    }
+
+    .contact-list,
+    .plain-list {
+      list-style: none;
+    }
+
+    .contact-list li,
+    .plain-list li {
+      margin-bottom: 10px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .bullet-list {
+      padding-left: 20px;
+      list-style: disc;
+    }
+
+    .bullet-list li {
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .summary {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .item {
+      margin-bottom: 30px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .item-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .item-date {
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .item-subtitle {
+      margin: 0 0 14px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin: 4px 6px 0 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 920px) {
+      .cv-card {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .name {
+        font-size: 1.7rem;
+      }
+
+      .main,
+      .sidebar {
+        padding: 24px 20px 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner {
+        padding: 12px 14px;
+      }
+
+      .page {
+        padding: 0 12px 30px;
+      }
+
+      .toolbar {
+        gap: 8px;
+      }
+
+      .icon-btn,
+      .download-btn,
+      .lang-btn {
+        padding: 9px 12px;
+        font-size: 0.9rem;
+      }
+
+      .name {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media print {
+      .topbar {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      .page {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .cv-card {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<div class="topbar">
-
-<strong>Matala Siongo CV</strong>
-
-<div class="controls">
-
-<button onclick="toggleLang()">🌐</button>
-
-<button onclick="toggleTheme()">🌙</button>
-
-<a href="./cv.pdf" download>
-<button>⬇ Download PDF</button>
-</a>
-
-</div>
-
-</div>
-
-<div class="page">
-
-<div class="cv">
-
-<div class="sidebar">
-
-<img src="./profile.jpg" class="avatar">
-
-<div class="name">Matala Siongo</div>
-
-<div class="role"
-data-en="Mobile Developer (iOS / Android) | SwiftUI • React Native • Cloud & IT Support"
-data-sv="Mobilutvecklare (iOS / Android) | SwiftUI • React Native • Cloud & IT Support">
-
-Mobile Developer (iOS / Android) | SwiftUI • React Native • Cloud & IT Support
-
-</div>
-
-<div class="section">
-
-<h3 data-en="Contact" data-sv="Kontakt">Contact</h3>
-
-<p><b>Tel:</b> +46 735916216</p>
-
-<p><b>Email:</b> siongomatala@gmail.com</p>
-
-<p><b>City:</b> Gothenburg</p>
-
-<p>
-<b>LinkedIn:</b>
-<a href="https://www.linkedin.com/in/matalasiongo/">
-linkedin.com/in/matalasiongo
-</a>
-</p>
-
-<p>
-<b>Portfolio:</b>
-<a href="https://matalasiongo.github.io/matalasiongo/">
-matalasiongo.github.io/matalasiongo
-</a>
-</p>
-
-</div>
-
-<div class="section">
-
-<h3 data-en="Languages" data-sv="Språk">Languages</h3>
-
-<ul>
-
-<li data-en="English (Full professional proficiency)" data-sv="Engelska (full professionell nivå)">
-English
-</li>
-
-<li data-en="French (Native language)" data-sv="Franska (modersmål)">
-French
-</li>
-
-<li data-en="Swedish (Working proficiency)" data-sv="Svenska (arbetsnivå)">
-Swedish
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-<div class="main">
-
-<h2>Matala Siongo</h2>
-
-<p
-
-data-en="I am an innovative iOS and Android Developer with a passion for creating high-quality, user-focused digital experiences. My background across diverse roles and projects has enabled me to build strong expertise in mobile application development, site reliability engineering, quality assurance automation, IT support, and systems administration. I adapt quickly to different working environments, from startups and remote teams to large enterprises and independent contract assignments."
-
-data-sv="Jag är en innovativ iOS- och Androidutvecklare med en stark passion för att skapa högkvalitativa och användarcentrerade digitala lösningar. Genom erfarenhet från olika roller och projekt har jag utvecklat kompetens inom mobilapplikationsutveckling, site reliability engineering, kvalitetssäkringsautomation, IT-support och systemadministration. Jag anpassar mig snabbt till olika arbetsmiljöer, från startups och distansbaserade team till större organisationer och konsultuppdrag."
-
->
-
-I am an innovative iOS and Android Developer with a passion for creating high-quality, user-focused digital experiences.
-
-</p>
-
-<div class="section">
-
-<h3 data-en="Highlighted Skills" data-sv="Kompetenser">Highlighted Skills</h3>
-
-<div class="skills">
-
-<span>SwiftUI</span>
-<span>React Native</span>
-<span>JavaScript</span>
-<span>Python</span>
-<span>Firebase</span>
-<span>Git & GitHub</span>
-<span>Microsoft 365</span>
-<span>Azure</span>
-<span>Intune</span>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h3 data-en="Work History" data-sv="Arbetslivserfarenhet">Work History</h3>
-
-<b>Räddningsmissionen AB</b>
-
-<p data-en="IT Support Technician (2025)" data-sv="IT-supporttekniker (2025)">
-IT Support Technician (2025)
-</p>
-
-<ul>
-
-<li>Microsoft 365 administration</li>
-<li>Entra ID</li>
-<li>Intune device management</li>
-<li>Freshservice ticketing system</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
-<h3 data-en="Education" data-sv="Utbildning">Education</h3>
-
-<b>Malmö Yrkeshögskola</b>
-
-<p data-en="Diploma in Software Application (Android & iOS)" data-sv="Diplom i mjukvaruutveckling (Android & iOS)">
-Diploma in Software Application (Android & iOS)
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-let lang="en"
-
-function toggleLang(){
-
-lang = lang === "en" ? "sv" : "en"
-
-document.querySelectorAll("[data-en]").forEach(el=>{
-
-el.innerText = el.dataset[lang]
-
-})
-
-}
-
-function toggleTheme(){
-
-document.body.classList.toggle("dark")
-
-}
-
-</script>
-
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Matala Siongo CV</div>
+
+      <div class="toolbar">
+        <div class="lang-wrap">
+          <button class="lang-btn" id="langToggle" type="button" aria-label="Change language">
+            🌐 <span id="langLabel">English</span>
+          </button>
+
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-option" type="button" onclick="setLanguage('en')">🇬🇧 English</button>
+            <button class="lang-option" type="button" onclick="setLanguage('sv')">🇸🇪 Svenska</button>
+          </div>
+        </div>
+
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode">
+          <span id="themeIcon">🌙</span>
+          <span id="themeText">Dark</span>
+        </button>
+
+        <a class="download-btn" href="./cv.pdf" download>
+          ⬇️ <span data-en="Download PDF" data-sv="Ladda ner PDF">Download PDF</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="cv-card">
+      <aside class="sidebar">
+        <div class="profile">
+          <img src="./profile.jpg" alt="Matala Siongo" class="avatar" />
+          <h1 class="name">Matala Siongo</h1>
+          <p
+            class="role"
+            data-en="Mobile Developer (iOS / Android) | SwiftUI • React Native • Cloud & IT Support"
+            data-sv="Mobilutvecklare (iOS / Android) | SwiftUI • React Native • Cloud & IT Support"
+          >
+            Mobile Developer (iOS / Android) | SwiftUI • React Native • Cloud & IT Support
+          </p>
+          <p class="location" data-en="Gothenburg, Sweden" data-sv="Göteborg, Sverige">Gothenburg, Sweden</p>
+        </div>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Contact" data-sv="Kontakt">Contact</h2>
+          <ul class="contact-list">
+            <li><strong data-en="Tel:" data-sv="Tel:">Tel:</strong> <a href="tel:+46735916216">+46 735916216</a></li>
+            <li><strong data-en="Email:" data-sv="E-post:">Email:</strong> <a href="mailto:siongomatala@gmail.com">siongomatala@gmail.com</a></li>
+            <li><strong data-en="City:" data-sv="Stad:">City:</strong> <span data-en="Gothenburg" data-sv="Göteborg">Gothenburg</span></li>
+            <li>
+              <strong>LinkedIn:</strong>
+              <a href="https://www.linkedin.com/in/matalasiongo/" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/matalasiongo
+              </a>
+            </li>
+            <li>
+              <strong data-en="Portfolio:" data-sv="Portfolio:">Portfolio:</strong>
+              <a href="https://matalasiongo.github.io/matalasiongo/" target="_blank" rel="noopener noreferrer">
+                matalasiongo.github.io/matalasiongo
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="IT Skills" data-sv="IT-kompetenser">IT Skills</h2>
+          <ul class="bullet-list">
+            <li data-en="Python and JavaScript developer" data-sv="Python- och JavaScriptutvecklare">Python and JavaScript developer</li>
+            <li data-en="Web design with HTML5 and CSS" data-sv="Webbdesign med HTML5 och CSS">Web design with HTML5 and CSS</li>
+            <li>Xcode</li>
+            <li data-en="Mobile application with Android Studio" data-sv="Mobilapplikationer med Android Studio">Mobile application with Android Studio</li>
+            <li>GitHub Copilot</li>
+            <li data-en="Swift programming language" data-sv="Programmeringsspråket Swift">Swift programming language</li>
+            <li data-en="Digital marketing" data-sv="Digital marknadsföring">Digital marketing</li>
+            <li data-en="Network administration" data-sv="Nätverksadministration">Network administration</li>
+            <li>Microsoft 365</li>
+            <li>Microsoft Azure</li>
+            <li>SQL Server</li>
+            <li data-en="Virtual machine deployment" data-sv="Driftsättning av virtuella maskiner">Virtual machine deployment</li>
+            <li data-en="IT support" data-sv="IT-support">IT support</li>
+            <li>Active Directory</li>
+            <li>Windows Server</li>
+            <li>Microsoft Intune</li>
+            <li data-en="Hardware troubleshooting" data-sv="Felsökning av hårdvara">Hardware troubleshooting</li>
+            <li data-en="Ticketing system" data-sv="Ärendehanteringssystem">Ticketing system</li>
+            <li data-en="System administration" data-sv="Systemadministration">System administration</li>
+            <li>Microsoft Entra ID</li>
+            <li>Microsoft Admin Center</li>
+            <li data-en="Kotlin for Android applications" data-sv="Kotlin för Androidapplikationer">Kotlin for Android applications</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Certificates" data-sv="Certifikat">Certificates</h2>
+          <ul class="plain-list">
+            <li>CISCO - Operating System Basics</li>
+            <li>CISCO - Networking Basics</li>
+            <li>CISCO - Introduction to Cyber Security</li>
+            <li>Microsoft MS-900</li>
+            <li>Microsoft SC-900</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Languages" data-sv="Språk">Languages</h2>
+          <ul class="plain-list">
+            <li data-en="English (Full professional proficiency)" data-sv="Engelska (full professionell nivå)">English (Full professional proficiency)</li>
+            <li data-en="French (Native language)" data-sv="Franska (modersmål)">French (Native language)</li>
+            <li data-en="Swedish (Working proficiency)" data-sv="Svenska (arbetsnivå)">Swedish (Working proficiency)</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Hobby / Interest" data-sv="Hobby / Intresse">Hobby / Interest</h2>
+          <ul class="plain-list">
+            <li data-en="Mental training" data-sv="Mental träning">Mental training</li>
+            <li data-en="Personal development" data-sv="Personlig utveckling">Personal development</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="References" data-sv="Referenser">References</h2>
+          <p data-en="Available upon request" data-sv="Lämnas på begäran">Available upon request</p>
+        </section>
+      </aside>
+
+      <section class="main">
+        <div class="section">
+          <h2 class="intro-title">MATALA SIONGO</h2>
+          <div class="underline"></div>
+
+          <div class="summary">
+            <p
+              data-en="I am an innovative iOS and Android Developer with a passion for creating high-quality, user-focused digital experiences. My background across diverse roles and projects has enabled me to build strong expertise in mobile application development, site reliability engineering, quality assurance automation, IT support, and systems administration."
+              data-sv="Jag är en innovativ iOS- och Androidutvecklare med en stark passion för att skapa högkvalitativa och användarcentrerade digitala lösningar. Genom erfarenhet från olika roller och projekt har jag utvecklat gedigen kompetens inom mobilapplikationsutveckling, site reliability engineering, kvalitetssäkringsautomation, IT-support och systemadministration."
+            >
+              I am an innovative iOS and Android Developer with a passion for creating high-quality, user-focused digital experiences. My background across diverse roles and projects has enabled me to build strong expertise in mobile application development, site reliability engineering, quality assurance automation, IT support, and systems administration.
+            </p>
+
+            <p
+              data-en="I adapt quickly to different working environments, from startups and remote teams to large enterprises and independent contract assignments. With hands-on experience in web and mobile development, multiple programming languages, frameworks, and IT support tools, I bring a versatile skill set that bridges software development and technical operations."
+              data-sv="Jag har en god förmåga att snabbt anpassa mig till olika arbetsmiljöer, från startups och distansbaserade team till större organisationer och konsultuppdrag. Med praktisk erfarenhet av både webb- och mobilutveckling, flera programmeringsspråk, ramverk och IT-supportverktyg bidrar jag med en bred teknisk kompetens som förenar mjukvaruutveckling och teknisk drift."
+            >
+              I adapt quickly to different working environments, from startups and remote teams to large enterprises and independent contract assignments. With hands-on experience in web and mobile development, multiple programming languages, frameworks, and IT support tools, I bring a versatile skill set that bridges software development and technical operations.
+            </p>
+          </div>
+        </div>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Highlighted Skills" data-sv="Utvalda kompetenser">Highlighted Skills</h2>
+          <div class="skills-grid">
+            <span class="tag">SwiftUI</span>
+            <span class="tag">React Native</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Git & GitHub</span>
+            <span class="tag">Microsoft 365</span>
+            <span class="tag">Azure</span>
+            <span class="tag">Intune</span>
+            <span class="tag">Entra ID</span>
+            <span class="tag">Power Automate</span>
+            <span class="tag">WordPress</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Work History" data-sv="Arbetslivserfarenhet">Work History</h2>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Techno Brain Company</h3>
+              <div class="item-date" data-en="August 2015 – December 2015" data-sv="Augusti 2015 – december 2015">August 2015 – December 2015</div>
+            </div>
+            <p class="item-subtitle" data-en="Position: System Developer (Internship)" data-sv="Roll: Systemutvecklare (praktik)">Position: System Developer (Internship)</p>
+            <ul class="bullet-list">
+              <li data-en="Developed web applications using ASP.NET Core MVC and JavaScript frameworks." data-sv="Utvecklade webbapplikationer med ASP.NET Core MVC och JavaScript-ramverk.">Developed web applications using ASP.NET Core MVC and JavaScript frameworks.</li>
+              <li data-en="Enhanced functionality and performance of existing systems." data-sv="Förbättrade funktionalitet och prestanda i befintliga system.">Enhanced functionality and performance of existing systems.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">WNS England</h3>
+              <div class="item-date" data-en="December 2015 – January 2018" data-sv="December 2015 – januari 2018">December 2015 – January 2018</div>
+            </div>
+            <p class="item-subtitle" data-en="Position: Customer Support" data-sv="Roll: Kundsupport">Position: Customer Support</p>
+            <ul class="bullet-list">
+              <li data-en="Delivered exceptional customer service to British Gas customers." data-sv="Levererade högkvalitativ kundservice till British Gas-kunder.">Delivered exceptional customer service to British Gas customers.</li>
+              <li data-en="Resolved billing queries and provided financial advice to prevent debt." data-sv="Löste faktureringsfrågor och gav ekonomisk rådgivning för att förebygga skulder.">Resolved billing queries and provided financial advice to prevent debt.</li>
+              <li data-en="Assisted customers with bereavement accounts and ensured safety and priority for vulnerable customers." data-sv="Hjälpte kunder med dödsboärenden och säkerställde trygghet och prioritet för utsatta kunder.">Assisted customers with bereavement accounts and ensured safety and priority for vulnerable customers.</li>
+              <li data-en="Worked in IT-related environments including Microsoft Teams, Outlook, Active Directory, Azure, and SAP." data-sv="Arbetade i IT-relaterade miljöer inklusive Microsoft Teams, Outlook, Active Directory, Azure och SAP.">Worked in IT-related environments including Microsoft Teams, Outlook, Active Directory, Azure, and SAP.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Räddningsmissionen AB</h3>
+              <div class="item-date" data-en="January 2025 – June 2025" data-sv="Januari 2025 – juni 2025">January 2025 – June 2025</div>
+            </div>
+            <p class="item-subtitle" data-en="Position: IT Support Technician" data-sv="Roll: IT-supporttekniker">Position: IT Support Technician</p>
+            <ul class="bullet-list">
+              <li data-en="Worked on developing and optimizing internal systems and processes." data-sv="Arbetade med att utveckla och optimera interna system och processer.">Worked on developing and optimizing internal systems and processes.</li>
+              <li data-en="Managed both hardware and software support within the organization." data-sv="Ansvarade för både hårdvaru- och mjukvarusupport inom organisationen.">Managed both hardware and software support within the organization.</li>
+              <li data-en="Ensured that systems and tools worked for students and staff, managed accounts and licenses via Microsoft 365 and Entra ID, and customized solutions through Intune for Windows and iPad devices." data-sv="Säkerställde att system och verktyg fungerade för elever och personal, hanterade konton och licenser via Microsoft 365 och Entra ID samt anpassade lösningar via Intune för Windows- och iPad-enheter.">Ensured that systems and tools worked for students and staff, managed accounts and licenses via Microsoft 365 and Entra ID, and customized solutions through Intune for Windows and iPad devices.</li>
+              <li data-en="Implemented and configured the Freshservice case management system." data-sv="Implementerade och konfigurerade ärendehanteringssystemet Freshservice.">Implemented and configured the Freshservice case management system.</li>
+              <li data-en="Automated onboarding processes with Power Automate and developed MDM solutions for Android devices." data-sv="Automatiserade onboardingprocesser med Power Automate och utvecklade MDM-lösningar för Android-enheter.">Automated onboarding processes with Power Automate and developed MDM solutions for Android devices.</li>
+              <li data-en="Worked with network configurations such as access points and switches, security solutions including attack simulation and security score improvements, and user support via TeamViewer and on-site." data-sv="Arbetade med nätverkskonfigurationer såsom accesspunkter och switchar, säkerhetslösningar inklusive attacksimulering och förbättring av säkerhetspoäng, samt användarsupport via TeamViewer och på plats.">Worked with network configurations such as access points and switches, security solutions including attack simulation and security score improvements, and user support via TeamViewer and on-site.</li>
+              <li data-en="Managed resources and permissions in Microsoft 365 products including Teams, SharePoint, and Exchange." data-sv="Hanterade resurser och behörigheter i Microsoft 365-produkter inklusive Teams, SharePoint och Exchange.">Managed resources and permissions in Microsoft 365 products including Teams, SharePoint, and Exchange.</li>
+              <li data-en="Supported the development of Räddningsmissionen's website and managed signature solutions via Crossware Signatures." data-sv="Stödde utvecklingen av Räddningsmissionens webbplats och hanterade signaturlösningar via Crossware Signatures.">Supported the development of Räddningsmissionen's website and managed signature solutions via Crossware Signatures.</li>
+              <li data-en="Provided support for networks, printers, projectors, smartboards, and other technical systems, and maintained the school's website in WordPress." data-sv="Gav support för nätverk, skrivare, projektorer, smartboards och andra tekniska system samt underhöll skolans webbplats i WordPress.">Provided support for networks, printers, projectors, smartboards, and other technical systems, and maintained the school's website in WordPress.</li>
+              <li data-en="IT environment: Office 365 Admin Center, Entra ID, Freshservice ticketing, TeamViewer, Azure, and related tools." data-sv="IT-miljö: Office 365 Admin Center, Entra ID, Freshservice-ärendehantering, TeamViewer, Azure och relaterade verktyg.">IT environment: Office 365 Admin Center, Entra ID, Freshservice ticketing, TeamViewer, Azure, and related tools.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title" data-en="Education Background" data-sv="Utbildningsbakgrund">Education Background</h2>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Lexicon IT-Proffs</h3>
+              <div class="item-date" data-en="08/2024 – December 2024" data-sv="08/2024 – december 2024">08/2024 – December 2024</div>
+            </div>
+            <p class="item-subtitle" data-en="Course: IT Support / Helpdesk Technician" data-sv="Kurs: IT-support / Helpdesktekniker">Course: IT Support / Helpdesk Technician</p>
+            <ul class="bullet-list">
+              <li>MS-900: 365 Fundamentals Cloud - Basics of Microsoft 365</li>
+              <li>SC-900: 365 Fundamentals Security - Basics of security in Microsoft 365 & Azure</li>
+              <li>MS-500: 365 Security Administrator - Advanced security in Microsoft 365 & Azure</li>
+              <li>MD-102: Endpoint Administrator - Installation and administration of Windows as an operating system</li>
+              <li>MS-700: Teams Administrator - Setting up, administering, and troubleshooting Teams in a corporate environment</li>
+              <li data-en="Cisco Networking Basics - Basic course in Cisco networking and communication between computers" data-sv="Cisco Networking Basics - Grundkurs i Cisco-nätverk och kommunikation mellan datorer">Cisco Networking Basics - Basic course in Cisco networking and communication between computers</li>
+              <li data-en="Virtualization & Hyper-V - Lab-oriented focus on virtualization" data-sv="Virtualisering & Hyper-V - Laborationsinriktat fokus på virtualisering">Virtualization & Hyper-V - Lab-oriented focus on virtualization</li>
+              <li>AZ-800: Server 2022 - Server management in hybrid environments, both on-premises & Azure</li>
+              <li>AZ-900: Azure Fundamentals - Comprehensive coverage of Azure, overview of all functionalities and services</li>
+              <li data-en="Information Security - In-depth study to ensure data accuracy, availability, and confidentiality" data-sv="Informationssäkerhet - Fördjupade studier för att säkerställa datakorrekthet, tillgänglighet och konfidentialitet">Information Security - In-depth study to ensure data accuracy, availability, and confidentiality</li>
+              <li>PowerShell</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Malmö Yrkeshögskola</h3>
+              <div class="item-date" data-en="Sep 2024 – December 2024" data-sv="Sep 2024 – december 2024">Sep 2024 – December 2024</div>
+            </div>
+            <ul class="bullet-list">
+              <li data-en="Modern software development with AI" data-sv="Modern mjukvaruutveckling med AI">Modern software development with AI</li>
+              <li data-en="Introduction to Xcode, Android Studio, Apple's and Google's ecosystems" data-sv="Introduktion till Xcode, Android Studio, Apples och Googles ekosystem">Introduction to Xcode, Android Studio, Apple's and Google's ecosystems</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Faculty Institute of Information and Communication (IFASIC)</h3>
+              <div class="item-date" data-en="2013 – 2017" data-sv="2013 – 2017">2013 – 2017</div>
+            </div>
+            <p class="item-subtitle" data-en="Bachelor’s degree in Computer Science" data-sv="Kandidatexamen i datavetenskap">Bachelor’s degree in Computer Science</p>
+            <p data-en="Focus on software development and system architecture." data-sv="Inriktning på mjukvaruutveckling och systemarkitektur.">
+              Focus on software development and system architecture.
+            </p>
+          </div>
+
+          <div class="item">
+            <div class="item-title-row">
+              <h3 class="item-title">Malmö Yrkeshögskola</h3>
+            </div>
+            <p class="item-subtitle" data-en="Diploma in Software Application (Android and iOS programming)" data-sv="Diplom i programvaruutveckling (Android- och iOS-programmering)">Diploma in Software Application (Android and iOS programming)</p>
+            <p
+              data-en="The course provides theoretical knowledge and practical experience in mobile application and system development for Android and iOS, enabling the creation of functional applications for different devices based on requirement specifications. The program also includes building backend solutions with modern APIs, using AI, and applying new technologies locally on mobile devices."
+              data-sv="Kursen ger teoretisk kunskap och praktisk erfarenhet inom mobilapplikationer och systemutveckling för Android och iOS, vilket gör det möjligt att skapa funktionella applikationer för olika enheter utifrån kravspecifikationer. Programmet omfattar även utveckling av backend-lösningar med moderna API:er, användning av AI och tillämpning av ny teknik lokalt i mobila enheter."
+            >
+              The course provides theoretical knowledge and practical experience in mobile application and system development for Android and iOS, enabling the creation of functional applications for different devices based on requirement specifications. The program also includes building backend solutions with modern APIs, using AI, and applying new technologies locally on mobile devices.
+            </p>
+
+            <ul class="bullet-list">
+              <li>SwiftUI</li>
+              <li>React Native</li>
+              <li>JavaScript</li>
+              <li>Git & GitHub</li>
+              <li>Firebase</li>
+              <li data-en="iOS Development" data-sv="iOS-utveckling">iOS Development</li>
+              <li data-en="Mobile UI/UX" data-sv="Mobil UI/UX">Mobile UI/UX</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const body = document.body;
+    const langMenu = document.getElementById("langMenu");
+    const langToggle = document.getElementById("langToggle");
+    const langLabel = document.getElementById("langLabel");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeText = document.getElementById("themeText");
+
+    function applyLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem("cv-language", lang);
+      langLabel.textContent = lang === "sv" ? "Svenska" : "English";
+
+      document.querySelectorAll("[data-en]").forEach((el) => {
+        el.textContent = lang === "sv" ? el.getAttribute("data-sv") : el.getAttribute("data-en");
+      });
+    }
+
+    function setLanguage(lang) {
+      applyLanguage(lang);
+      langMenu.classList.remove("show");
+    }
+
+    function applyTheme(theme) {
+      const isDark = theme === "dark";
+      body.classList.toggle("dark", isDark);
+      localStorage.setItem("cv-theme", theme);
+      themeIcon.textContent = isDark ? "☀️" : "🌙";
+      themeText.textContent = isDark ? "Light" : "Dark";
+    }
+
+    langToggle.addEventListener("click", () => {
+      langMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".lang-wrap")) {
+        langMenu.classList.remove("show");
+      }
+    });
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = body.classList.contains("dark") ? "light" : "dark";
+      applyTheme(nextTheme);
+    });
+
+    const savedLang = localStorage.getItem("cv-language") || "en";
+    const savedTheme =
+      localStorage.getItem("cv-theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+    applyLanguage(savedLang);
+    applyTheme(savedTheme);
+  </script>
 </body>
-
 </html>
