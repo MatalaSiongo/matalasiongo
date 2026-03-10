@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siongo Matala | CV</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+padding:0;
+background:#f4f4f4;
+color:#222;
+transition:0.3s;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px;
+}
+
+.header{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+img{
+width:120px;
+border-radius:50%;
+}
+
+h1{
+margin:0;
+}
+
+.toggle{
+position:fixed;
+top:20px;
+right:20px;
+cursor:pointer;
+}
+
+.lang{
+position:fixed;
+top:20px;
+right:120px;
+cursor:pointer;
+}
+
+section{
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="toggle" onclick="toggleMode()">🌙</button>
+
+<select class="lang" onchange="changeLang(this.value)">
+<option value="en">English</option>
+<option value="sv">Svenska</option>
+</select>
+
+<div class="container">
+
+<div class="header">
+
+<img src="profile.jpg">
+
+<div>
+<h1>Siongo Matala</h1>
+<p>iOS & Android Developer</p>
+<p>📍 Gothenburg, Sweden</p>
+</div>
+
+</div>
+
+<section>
+
+<h2 data-en="Profile" data-sv="Profil">Profile</h2>
+
+<p data-en="Innovative iOS and Android developer passionate about building great mobile experiences."
+data-sv="Innovativ iOS och Android utvecklare med passion för att skapa fantastiska mobilupplevelser.">
+Innovative iOS and Android developer passionate about building great mobile experiences.
+</p>
+
+</section>
+
+<section>
+
+<h2 data-en="Skills" data-sv="Kompetenser">Skills</h2>
+
+<ul>
+<li>Swift / SwiftUI</li>
+<li>React Native</li>
+<li>Firebase</li>
+<li>JavaScript</li>
+<li>Python</li>
+<li>Git & GitHub</li>
+</ul>
+
+</section>
+
+<section>
+
+<h2 data-en="Experience" data-sv="Erfarenhet">Experience</h2>
+
+<p><b>IT Support Technician — Räddningsmissionen</b></p>
+<p>2025</p>
+
+</section>
+
+<section>
+
+<h2 data-en="Education" data-sv="Utbildning">Education</h2>
+
+<p>Bachelor in Computer Science</p>
+
+</section>
+
+</div>
+
+<script>
+
+function toggleMode(){
+document.body.classList.toggle("dark")
+}
+
+function changeLang(lang){
+
+document.querySelectorAll("[data-en]").forEach(el=>{
+el.innerText = el.dataset[lang]
+})
+
+}
+
+</script>
+
+</body>
+</html>
