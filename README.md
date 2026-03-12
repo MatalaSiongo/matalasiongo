@@ -37,4 +37,6 @@ https://github.com/MatalaSiongo/PiaAndroidUppgift1
 
 ## 📫 Contact
 
-GitHub: https://github.com/MatalaSiongo
+GitHub: https://github.com/MatalaSiongo 
+Email: siongomatala@gmail.com 
+LinkedIn: https://www.linkedin.com/in/matalasiongo/ 
