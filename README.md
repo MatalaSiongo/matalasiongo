@@ -1,38 +1,55 @@
-# Hi 👋 I'm Matala Siongo
+##👋 Hi, I'm Matala Siongo
 
-Mobile Developer | iOS • Android • React Native
+##Mobile Developer | Android • iOS • React Native
 
-I build mobile applications using SwiftUI, Kotlin, and React Native.
+I build modern mobile applications using Kotlin, Jetpack Compose, SwiftUI, React Native, Firebase and AI-powered cloud services.
+
+Current Projects:
+- PocketTrack (AI Finance Tracker)
+- TickMe (Task & Calendar App)
+- AfricaEats (Food Delivery Platform)
 
 ---
 
 ## 🚀 Projects
 
 ### TickMe
-A productivity and scheduling app built with **SwiftUI**.
+A productivity and scheduling app built with SwiftUI.
+
+### PocketTrack
+A personal finance management application built with Kotlin and Jetpack Compose.
+
+Features:
+- User registration and login with Firebase Authentication
+- Income and expense tracking
+- Monthly financial summaries
+- Transaction history filtering
+- Finance calculator
+- Profile management
+- Email update functionality
+- Account deletion
+- Notification preferences
+- AI-powered Finance Assistant
+
+Tech Stack:
+- Kotlin
+- Jetpack Compose
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Cloud Functions
+- OpenAI API
+
+Repository:
+https://github.com/MatalaSiongo/PocketTrack
 
 ### AfricaEats
-Food delivery application built with **React Native**.
+Food delivery application built with React Native.
 
 ### Android Navigation App
 Jetpack Compose project demonstrating screen navigation.
 
 Repository:
 https://github.com/MatalaSiongo/PiaAndroidUppgift1
-
----
-
-## 🛠 Technologies
-
-- Swift / SwiftUI
-- Kotlin
-- Jetpack Compose
-- React Native
-- Firebase
-- Git / GitHub
-- Android Studio
-- Xcode
-
 ---
 
 ## 📫 Contact
