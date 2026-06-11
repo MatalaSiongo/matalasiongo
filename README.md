@@ -1,6 +1,6 @@
-##👋 Hi, I'm Matala Siongo
+## 👋 Hi, I'm Matala Siongo
 
-##Mobile Developer | Android • iOS • React Native
+## Mobile Developer | Android • iOS • React Native
 
 I build modern mobile applications using Kotlin, Jetpack Compose, SwiftUI, React Native, Firebase and AI-powered cloud services.
 
