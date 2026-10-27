@@ -8,6 +8,7 @@ Current Projects:
 - PocketTrack (AI Finance Tracker)
 - TickMe (Task & Calendar App)
 - AfricaEats (Food Delivery Platform)
+- SkyCast – Weather & Forecast
 
 ---
 
