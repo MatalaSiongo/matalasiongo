@@ -9,6 +9,7 @@ Current Projects:
 - TickMe (Task & Calendar App)
 - AfricaEats (Food Delivery Platform)
 - SkyCast – Weather & Forecast
+- ChatrobotAI (Web application)
 
 ---
 
